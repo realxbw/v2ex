@@ -15,6 +15,11 @@ V2EX_URL_START = r'https://' + V2EX_DOMAIN
 V2EX_MISSION = V2EX_URL_START + r'/mission/daily'
 V2EX_COIN_URL = r'/mission/daily/redeem?once='
 
+# Please reconfigure after failure
+PROXIES = {
+    'https': ''
+}
+
 
 def get_once_url(data):
     p = '/mission/daily/redeem\\?once=\\d+'
@@ -49,7 +54,7 @@ def make_cookie(name, value):
 if __name__ == '__main__':
     cj = cookiejar.CookieJar()
     cj.set_cookie(make_cookie('auth', V2EX_COOKIE))
-    opener = request.build_opener(request.HTTPCookieProcessor(cj))
+    opener = request.build_opener(request.HTTPCookieProcessor(cj), request.ProxyHandler(PROXIES))
 
     opener.addheaders = [
         ('User-Agent', 'Mozilla/5.0 (Windows NT 6.1; rv:20.0) Gecko/20100101 Firefox/20.0'),

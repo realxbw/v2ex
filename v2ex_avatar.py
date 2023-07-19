@@ -4,18 +4,23 @@ from urllib import request
 from urllib import error
 from hashlib import md5
 
+# Please configure it yourself
+PROXIES = {
+    'https': ''
+}
+
 
 # get v2ex registered user count
 def get_user_count():
     try:
-        resp = request.urlopen('https://www.v2ex.com/api/site/stats.json')
+        opener = request.build_opener(request.ProxyHandler(PROXIES))
+        resp = opener.open('https://www.v2ex.com/api/site/stats.json')
     except error.URLError as e:
         print(e.reason)
         return -1
 
     data = resp.read()
     jrel = json.loads(data)
-
     return jrel['member_max']
 
 
@@ -30,7 +35,8 @@ def get_user_avatar(user_id):
     localjpg = str(user_id) + '.png'
 
     try:
-        resp = request.urlopen(jpgurl)
+        opener = request.build_opener(request.ProxyHandler(PROXIES))
+        resp = opener.open(jpgurl)
     except error.URLError as e:
         print(jpgurl, '[', e.reason, '] => ', localjpg)
         return jpgurl
