@@ -1,5 +1,5 @@
 ## V2EX ##
-几个针对[V2EX](https://v2ex.com)写的小脚本~
+几个针对[V2EX](https://v2ex.com)写的小脚本~ **(已支持Python3、增加代理访问)**
 
 ## v2ex_daily.py ##
 无任何非标准库依赖, 获取v2ex每日登录奖励.
